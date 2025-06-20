@@ -1,0 +1,35 @@
+// frontend/src/components/patient/PatientHeader.js
+import { Navbar, Container, Nav, Button, Image } from 'react-bootstrap';
+import { useAuth } from '../../context/AuthContext';
+
+const PatientHeader = () => {
+  const { user, logout } = useAuth();
+
+  return (
+    <Navbar bg="light" expand="lg">
+      <Container fluid>
+        <Navbar.Brand>Patient Dashboard</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+          <Nav>
+            <Navbar.Text className="me-3">
+              <Image
+                src={user?.avatar?.url || '/images/default-avatar.png'}
+                roundedCircle
+                width="30"
+                height="30"
+                className="me-2"
+              />
+              {user?.name}
+            </Navbar.Text>
+            <Button variant="outline-danger" onClick={logout}>
+              Logout
+            </Button>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+};
+
+export default PatientHeader;
